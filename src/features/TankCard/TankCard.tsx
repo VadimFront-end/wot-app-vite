@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch } from 'app/hooks';
+
 import { setSelectedTankName } from '../PlayerInfo/storePlayerInfo';
 import { useGetTankInfoQuery } from './tanksCardApi';
 

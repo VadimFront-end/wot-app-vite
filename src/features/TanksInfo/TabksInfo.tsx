@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
+import { useTable } from 'app/castomHooks';
+
 import { useGetTanksListQuery } from './tanksInfoApi';
 import TankCell from '../PlayerInfo/components/components/TankCell/TankCell';
-import { useTable } from '../../app/castomHooks';
 
 const columns = [
     {

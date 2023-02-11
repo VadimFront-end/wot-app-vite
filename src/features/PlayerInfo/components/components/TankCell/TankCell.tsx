@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Spin, Tooltip } from 'antd/es';
 
-import { useGetTankInfoQuery } from '../../../../TankCard/tanksCardApi';
+import { useGetTankInfoQuery } from 'features/TankCard/tanksCardApi';
 
 interface IProps {
     tankId: number,

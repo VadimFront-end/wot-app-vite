@@ -1,9 +1,10 @@
 import React from 'react';
 
+import { getPrettyNumber } from 'app/helpers';
+import { useTable } from 'app/castomHooks';
+import { useGetPlayerTanksListQuery } from 'features/PlayerInfo/playerInfoApi';
+
 import TankCell from '../TankCell/TankCell';
-import { useGetPlayerTanksListQuery } from '../../../playerInfoApi';
-import { getPrettyNumber } from '../../../../../app/helpers';
-import { useTable } from '../../../../../app/castomHooks';
 
 interface IProps {
     playerId: string,

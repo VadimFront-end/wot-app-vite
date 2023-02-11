@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import { accountListApi } from '../features/PlayerInfo/playerInfoApi';
-import playerInfoReducer from '../features/PlayerInfo/storePlayerInfo';
-import { tanksInfoApi } from '../features/TanksInfo/tanksInfoApi';
-import { tankCardApi } from '../features/TankCard/tanksCardApi';
-import { achievementsInfoApi } from '../features/AchievementsInfo/achievementsInfoApi';
+import { accountListApi } from 'features/PlayerInfo/playerInfoApi';
+import playerInfoReducer from 'features/PlayerInfo/storePlayerInfo';
+import { tanksInfoApi } from 'features/TanksInfo/tanksInfoApi';
+import { tankCardApi } from 'features/TankCard/tanksCardApi';
+import { achievementsInfoApi } from 'features/AchievementsInfo/achievementsInfoApi';
 
 const Middlewares = [ accountListApi.middleware, tanksInfoApi.middleware, tankCardApi.middleware, achievementsInfoApi.middleware ];
 

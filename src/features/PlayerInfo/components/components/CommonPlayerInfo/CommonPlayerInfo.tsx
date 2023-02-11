@@ -2,12 +2,13 @@ import React, { useCallback, useEffect } from 'react';
 
 import { Descriptions, Progress, Spin, Tooltip } from 'antd/es';
 
+import { useAppDispatch } from 'app/hooks';
+import { getPrettyNumber } from 'app/helpers';
+import { getAccountName } from 'features/PlayerInfo/storePlayerInfo';
+import { useGetAccountInfoQuery } from 'features/PlayerInfo/playerInfoApi';
+
 import descriptionPattern from '../../descriptionPattern';
 import TankCell from '../TankCell/TankCell';
-import { useGetAccountInfoQuery } from '../../../playerInfoApi';
-import { getAccountName } from '../../../storePlayerInfo';
-import { useAppDispatch } from '../../../../../app/hooks';
-import { getPrettyNumber } from '../../../../../app/helpers';
 
 interface IProps {
     playerId: string;
