@@ -23,7 +23,7 @@ const PlayerInfo: React.FC = () => {
     const { data: accountList, isFetching } = useGetAccountListQuery({ search: searchValue }, { skip: searchValue.length < 3 });
 
     const nickNameList = accountList?.data?.map((account: IAccountData) => (
-        <List.Item className="player-info__search-item" onClick={() => navigate(`/search-player/${account.account_id}`)} key={account.account_id}>
+        <List.Item className="player-info__search-item" onClick={() => navigate(`/players/${account.account_id}`)} key={account.account_id}>
             <a>{account.nickname}</a>
         </List.Item>
     ));

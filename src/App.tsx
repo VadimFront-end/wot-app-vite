@@ -20,11 +20,11 @@ const emptyResult = <Result status="404" title="404" subTitle="Страница 
 
 const routes = [
     {
-        path: '/search-player',
+        path: '/players',
         element: <PlayerInfo />,
     },
     {
-        path: '/search-player/:id',
+        path: '/players/:id',
         element: <PlayerCard />,
     },
     {
@@ -54,13 +54,13 @@ const App: React.FC = () => {
 
     useEffect(() => {
         if (location.pathname === '/') {
-            navigate('/search-player');
+            navigate('/players');
         }
     }, []);
 
     const menuItems = [
-        { label: `Статистика игрока ${nickname}`, key: '/search-player/', hidden: true },
-        { label: 'Поиск игрока', key: '/search-player', icon: <SearchOutlined /> },
+        { label: `Статистика игрока ${nickname}`, key: '/players/', hidden: true },
+        { label: 'Поиск игрока', key: '/players', icon: <SearchOutlined /> },
         { label: `Описание танка ${tankName}`, key: '/tanks/', icon: <TableOutlined />, hidden: true },
         { label: 'Техника', key: '/tanks', icon: <TableOutlined /> },
         { label: 'Достижения', key: '/achievements', icon: <AreaChartOutlined /> },
@@ -71,7 +71,7 @@ const App: React.FC = () => {
     return (
         <Layout className="main-layout" hasSider>
             <Sider collapsible collapsedWidth={64}>
-                <Link to="/search-player">
+                <Link to="/players">
                     <Tooltip title="На главную" placement="right">
                         <div style={{ background: '#f0f2f5' }}>
                             <img src={logo} alt="Лого" width={64} height={64} style={{ margin: 'auto', display: 'block' }} />
