@@ -9,7 +9,7 @@ import 'antd/dist/antd.min.css';
 
 import { store } from './app/store';
 import App from './App';
-import './index.css';
+import './index.less';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

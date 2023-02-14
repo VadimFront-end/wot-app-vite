@@ -1,0 +1,17 @@
+.players-comparison {
+    .ant-col {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 8px;
+        justify-content: center;
+
+        &:not(:last-child) {
+            border-right: 1px solid black;
+        }
+    }
+}
+
+.ant-row + .players-comparison {
+    border-top: 1px solid black;
+}
