@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { useRoutes, useLocation, useNavigate, Link } from 'react-router-dom';
 
 import { SearchOutlined, TableOutlined, AreaChartOutlined, DiffTwoTone } from '@ant-design/icons';
@@ -10,13 +10,13 @@ import TanksInfo from './features/TanksInfo/TabksInfo';
 import TanksCard from './features/TankCard/TankCard';
 import PlayerCard from './features/PlayerInfo/components/PlayerCard/PlayerCard';
 import AchievementsInfo from './features/AchievementsInfo/AchievementsInfo';
-import { useAppSelector } from './app/hooks';
 import logo from './imgs/main.png';
 
 import './App.less';
 
 const { Content, Sider, Header } = Layout;
 
+export const ContextOnChangeId = createContext((value = '') => {});
 const emptyResult = <Result status="404" title="404" subTitle="Страница не найдена" />;
 
 const routes = [
@@ -53,9 +53,8 @@ const routes = [
 const App: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
-
-    const nickname = useAppSelector(state => state.playerInfo.nickname);
-    const tankName = useAppSelector(store => store.playerInfo.selectedTankName);
+    
+    const [ param, setParam ] = useState<string>('');
 
     useEffect(() => {
         if (location.pathname === '/') {
@@ -64,13 +63,17 @@ const App: React.FC = () => {
     }, []);
 
     const menuItems = [
-        { label: `Статистика игрока ${nickname}`, key: '/players/statistic/', hidden: true },
+        { label: `Статистика игрока ${param}`, key: '/players/statistic/', hidden: true },
         { label: 'Сравнение игроков', key: '/players/comparison', hidden: true },
         { label: 'Поиск игрока', key: '/players', icon: <SearchOutlined /> },
-        { label: `Описание танка ${tankName}`, key: '/tanks/', hidden: true },
+        { label: `Описание танка ${param}`, key: '/tanks/', hidden: true },
         { label: 'Техника', key: '/tanks', icon: <TableOutlined /> },
         { label: 'Достижения', key: '/achievements', icon: <AreaChartOutlined /> },
     ];
+    
+    const onChangeId = useCallback((value = '') => {
+        setParam(value);
+    }, [ setParam ]);
 
     const selectedKeys = [ location.pathname.indexOf('/', 1) === -1 ? location.pathname : location.pathname.substring(0, location.pathname.indexOf('/', 1)) ];
 
@@ -93,7 +96,11 @@ const App: React.FC = () => {
                         <DiffTwoTone onClick={() => navigate('/players/comparison')} />
                     </Tooltip>
                 </Header>
-                <Content>{useRoutes(routes)}</Content>
+                <Content>
+                    <ContextOnChangeId.Provider value={onChangeId}>
+                        {useRoutes(routes)}
+                    </ContextOnChangeId.Provider>
+                </Content>
             </Layout>
         </Layout>
     );

@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 
 import { Descriptions, Progress, Spin, Tooltip } from 'antd/es';
 
-import { useAppDispatch } from 'app/hooks';
+import { ContextOnChangeId } from 'App';
 import { getPrettyNumber } from 'app/helpers';
-import { getAccountName } from 'features/PlayerInfo/storePlayerInfo';
 import { useGetAccountInfoQuery } from 'features/PlayerInfo/playerInfoApi';
 
 import descriptionPattern from '../../descriptionPattern';
@@ -15,7 +14,8 @@ interface IProps {
 }
 
 const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
-    const dispatch = useAppDispatch();
+    const onChangeId = useContext(ContextOnChangeId);
+
     const { data: accountInfo, isFetching } = useGetAccountInfoQuery({ account_id: playerId || '' }, { skip: !playerId });
 
     const { all } = accountInfo?.data?.[playerId || 0]?.statistics || {};
@@ -23,9 +23,9 @@ const CommonPlayerInfo: React.FC<IProps> = ({ playerId }) => {
 
     useEffect(() => {
         if (accountInfo) {
-            dispatch(getAccountName(accountInfo?.data?.[playerId || 0]?.nickname));
+            onChangeId(accountInfo?.data?.[playerId || 0]?.nickname);
         }
-    }, [ accountInfo ]);
+    }, [ accountInfo, onChangeId, playerId ]);
 
     const accountInfoRender = useCallback(
         () =>

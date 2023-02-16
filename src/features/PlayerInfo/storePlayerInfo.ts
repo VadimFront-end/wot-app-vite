@@ -6,14 +6,10 @@ export enum Actions {
 }
 interface IInitState {
     playersComparison: number[];
-    nickname: string;
-    selectedTankName: string;
 }
 
 const initialState: IInitState = {
     playersComparison: [],
-    nickname: '',
-    selectedTankName: '',
 };
 
 const slicePlayerInfo = createSlice({
@@ -30,15 +26,9 @@ const slicePlayerInfo = createSlice({
                     break;
             }
         },
-        getAccountName: (state: IInitState, action: PayloadAction<string>) => {
-            state.nickname = action.payload;
-        },
-        setSelectedTankName: (state: IInitState, action: PayloadAction<string>) => {
-            state.selectedTankName = action.payload;
-        },
     },
 });
 
-export const { getAccountName, setSelectedTankName, setPlayersComparison } = slicePlayerInfo.actions;
+export const { setPlayersComparison } = slicePlayerInfo.actions;
 
 export default slicePlayerInfo.reducer;

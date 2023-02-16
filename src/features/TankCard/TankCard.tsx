@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useAppDispatch } from 'app/hooks';
+import { ContextOnChangeId } from 'App';
 
-import { setSelectedTankName } from '../PlayerInfo/storePlayerInfo';
 import { useGetTankInfoQuery } from './tanksCardApi';
 
 const TankCard: React.FC = () => {
-    const dispatch = useAppDispatch();
-    const { id } = useParams<{ id: string }>();
+    const { id = '' } = useParams<{ id: string }>();
+
+    const onChangeId = useContext(ContextOnChangeId);
 
     const { data: tankInfo } = useGetTankInfoQuery({ tank_id: +(id as string) }, { skip: !id });
 
-    const { images, name } = tankInfo?.data[id || 0] || {};
-    console.log(tankInfo?.data[id || 0].default_profile);
+    const { images, name } = tankInfo?.data[+id] || {};
+    console.log(tankInfo?.data[+id].default_profile);
 
     useEffect(() => {
         if (name) {
-            dispatch(setSelectedTankName(name));
+            onChangeId(name);
         }
-    }, [ id ]);
+    }, [ id, name, onChangeId ]);
 
     return (
         <>
