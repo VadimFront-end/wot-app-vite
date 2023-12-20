@@ -1,7 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 
-export const dataWithAccountId = (data: Record<string, string | number>) => ({ application_id: '3c4d97aabbf1f1abc18a0559ffbda320', ...data });
+export const dataWithAccountId = (data: Record<string, string | number>) => ({ application_id: '38c031f69a335515bf7693436c3a1427', ...data });
 
 export const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://api.tanki.su/wot',
+    baseUrl: 'https://api.worldoftanks.eu/wot/',
 });
